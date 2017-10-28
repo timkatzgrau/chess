@@ -1,4 +1,4 @@
-package chess.pieces;
+package pieces;
 
 public class King extends Piece {
 	

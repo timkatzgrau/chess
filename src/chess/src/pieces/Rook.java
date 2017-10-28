@@ -1,8 +1,8 @@
-package chess.pieces;
+package pieces;
 
-public class Bishop extends Piece {
+public class Rook extends Piece {
 	
-	public Bishop (char type, char color) {
+	public Rook (char type, char color) {
 		
 		this.type = type;
 		this.color = color;

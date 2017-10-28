@@ -1,12 +1,12 @@
-package chess;
 
-import chess.pieces.Bishop;
-import chess.pieces.King;
-import chess.pieces.Knight;
-import chess.pieces.Pawn;
-import chess.pieces.Piece;
-import chess.pieces.Queen;
-import chess.pieces.Rook;
+
+import pieces.Bishop;
+import pieces.King;
+import pieces.Knight;
+import pieces.Pawn;
+import pieces.Piece;
+import pieces.Queen;
+import pieces.Rook;
 
 public class ChessBoard {
 	
