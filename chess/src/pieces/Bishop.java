@@ -1,5 +1,7 @@
 package pieces;
 
+import game.ChessBoard;
+
 public class Bishop extends Piece {
 	
 	public Bishop (char type, char color) {
@@ -10,9 +12,13 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean canDoMove(String curr, String fin, Piece[][] board) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
+		if(isDiagnal(board, startColumn, startRow, endColumn, endRow, false)) {
+			return true;
+		}else {
+			System.out.println("Invalid Move");
+			return false;
+		}
 	}
 
 }
