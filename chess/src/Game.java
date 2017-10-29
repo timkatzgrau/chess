@@ -4,9 +4,68 @@ public class Game {
 	
 	private static Scanner scanner;
 
+	public static boolean isVertical(ChessBoard board, int startColumn, int endColumn  ) {
+		if(startColumn == endColumn) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	public static boolean isHorizontal(ChessBoard board, int startRow, int endRow  ) {
+		if(startRow == endRow) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	//Works only for bottom left right now
+	public static boolean isDiagnal(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow)  {
+		
+		int vertDirection = 0;
+		int horDirection = 0;
+		System.out.println("startCol = "+ startColumn);
+		System.out.println("startRow = "+ startRow);
+		System.out.println("endCol = "+ endColumn);
+		System.out.println("endRow = "+ endRow);
+		
+		if(startColumn > endColumn) {
+			horDirection = -1;
+		}else if(startColumn < endColumn){
+			horDirection = 1;
+		}
+		
+		if(startRow < endRow) {
+			vertDirection = -1;
+		}else if(startColumn < endColumn){
+			vertDirection = 1;
+		}
+		
+		boolean diag = true;
+		int tempx = startRow;
+		int tempy = startColumn;
+		
+		
+		while(diag) {
+			System.out.println("endRow"+endRow);
+			System.out.println("endCol: "+endColumn);
+			System.out.println(tempx);
+			System.out.println(tempy);
+			
+
+			tempx++;
+			tempy--;
+			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
+				if(tempx == endRow && tempy == endColumn) {
+					return true;
+				}
+			}else {
+				return false;
+			}
+		}
+		return false;
+	}
 	public static boolean attemptMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow){		
 		if(board.chessBoard[startRow][startColumn] == null){
-			System.out.println("This is not a valid piece.");
 			return false;
 		}else if(board.chessBoard[startRow][startColumn].color == 'b' && board.whitesTurn == true){
 			System.out.print(board.chessBoard[startRow][startColumn].color);
@@ -15,6 +74,9 @@ public class Game {
 			return false;
 		}else if(board.chessBoard[startRow][startColumn].color == 'w' && board.whitesTurn == false) {
 			System.out.println("Invalid Move. It is black's turn.");
+			return false;
+		}else if(startColumn == endColumn && startRow == endRow) {
+			System.out.println("Invalid Move. You cannot move to the same space.");
 			return false;
 		}
 		return true;
@@ -58,6 +120,7 @@ public class Game {
 		//		}
 			}
 			if(attemptMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
+				System.out.println(isDiagnal(board,startingColumn,startingRow, endingColumn, endingRow));
 				board.whitesTurn = !board.whitesTurn;
 			}
 		}
