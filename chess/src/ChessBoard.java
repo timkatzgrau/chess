@@ -63,6 +63,7 @@ public class ChessBoard {
 	}
 	
 	public char convertIndexToFile (int index) {
+		
 		if (index == 0) {
 			return 'a';
 		} else if (index == 1) {
@@ -80,6 +81,7 @@ public class ChessBoard {
 		} else if (index == 7) {
 			return 'h';
 		}
+		
 		
 		return '0';
 	}

@@ -46,20 +46,82 @@ public class Game {
 		
 		
 		while(diag) {
-			System.out.println("endRow"+endRow);
-			System.out.println("endCol: "+endColumn);
+			System.out.println("test 0");
 			System.out.println(tempx);
 			System.out.println(tempy);
 			
-
 			tempx++;
 			tempy--;
 			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
 				if(tempx == endRow && tempy == endColumn) {
 					return true;
 				}
+			}else{
+				diag = false;
+			}
+		}
+		
+		tempx = startRow;
+		tempy = startColumn;
+		diag = true;
+		
+		while(diag) {
+			System.out.println("test 1");
+			System.out.println(tempx);
+			System.out.println(tempy);
+			
+
+			tempx++;
+			tempy++;
+			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
+				if(tempx == endRow && tempy == endColumn) {
+					return true;
+				}
 			}else {
-				return false;
+				diag = false;
+			}
+		}
+		tempx = startRow;
+		tempy = startColumn;
+		diag = true;
+
+		while(diag) {
+			System.out.println("test 2");
+
+			System.out.println(tempx);
+			System.out.println(tempy);
+			
+
+			tempx--;
+			tempy--;
+			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
+				if(tempx == endRow && tempy == endColumn) {
+					return true;
+				}
+			}else {
+				diag = false;
+			}
+		}
+		
+		tempx = startRow;
+		tempy = startColumn;
+		diag = true;
+
+		while(diag) {
+			System.out.println("test 3");
+
+			System.out.println(tempx);
+			System.out.println(tempy);
+			
+
+			tempx--;
+			tempy++;
+			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
+				if(tempx == endRow && tempy == endColumn) {
+					return true;
+				}
+			}else {
+				diag = false;
 			}
 		}
 		return false;
@@ -118,11 +180,26 @@ public class Game {
 		//		while (!board.checkmate) {
 		//			System.out.println("playing game");
 		//		}
+				if(attemptMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
+					System.out.println(isDiagnal(board,startingColumn,startingRow, endingColumn, endingRow));
+					if(board.chessBoard[endingRow][endingColumn] != null) {
+						if(board.chessBoard[endingRow][endingColumn].color == 'w' && board.whitesTurn == true) {
+							board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+							board.chessBoard[startingRow][startingColumn] = null;
+							board.whitesTurn = !board.whitesTurn;
+						}else if(board.chessBoard[endingRow][endingColumn].color == 'b' && board.whitesTurn == false) {
+							board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+							board.chessBoard[startingRow][startingColumn] = null;
+							board.whitesTurn = !board.whitesTurn;
+						}
+					}else {
+						board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+						board.chessBoard[startingRow][startingColumn] = null;
+						board.whitesTurn = !board.whitesTurn;
+					}
+				}
 			}
-			if(attemptMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
-				System.out.println(isDiagnal(board,startingColumn,startingRow, endingColumn, endingRow));
-				board.whitesTurn = !board.whitesTurn;
-			}
+			
 		}
 	}
 }
