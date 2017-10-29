@@ -23,6 +23,7 @@ public abstract class Piece {
 
 			if(singleStep) {
 				int diff = Math.abs(startColumn-endColumn);
+				System.out.println("Diff: "+ diff);
 
 				if(diff == 1) {
 					return true;
@@ -37,9 +38,13 @@ public abstract class Piece {
 	}
 	public static boolean isHorizontal(ChessBoard board, int startColumn,int startRow, int endColumn, int endRow,  boolean singleStep  ) {
 		//Will need to check whether there are pieces in the way.
-		if(startRow == endRow) {
+		System.out.println(startColumn);
+		System.out.println(startRow);
+		System.out.println(endColumn);
+		System.out.println(endRow);
+		if(startColumn == endColumn) {
 			if(singleStep) {
-				int diff = Math.abs(startColumn-endColumn);
+				int diff = Math.abs(startRow - endRow);
 				if(diff == 1) {
 					return true;
 				}else {

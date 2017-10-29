@@ -13,7 +13,7 @@ public class Bishop extends Piece {
 
 	@Override
 	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
-		if(isDiagnal(board, startColumn, startRow, endColumn, endRow, false)) {
+		if(isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
 			return true;
 		}else {
 			System.out.println("Invalid Move");

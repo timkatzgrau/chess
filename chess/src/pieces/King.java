@@ -13,7 +13,7 @@ public class King extends Piece {
 
 	@Override
 	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
-		if(isHorizontal(board,startRow,startColumn,endRow,endColumn, true) || isVertical(board,startRow,startColumn,endRow,endColumn, true) || isDiagnal(board, startColumn, startRow, endColumn, endRow, true)) {
+		if(isHorizontal(board,startColumn,startRow,endColumn,endRow, false) || isVertical(board,startColumn,startRow,endColumn,endRow, false) || isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
 			return true;
 		}else {
 			System.out.println("Invalid Move");
