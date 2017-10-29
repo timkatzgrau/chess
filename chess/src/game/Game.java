@@ -28,6 +28,7 @@ public class Game {
 		ChessBoard board = new ChessBoard();
 
 		while(true) {
+			System.out.println("-------------------------");
 			Scanner scanner = new Scanner(System.in).useDelimiter(" ");
 			board.showChessBoard();
 	
@@ -45,19 +46,7 @@ public class Game {
 			int endingRow =  board.convertRank(startingPosition.charAt(4));	
 			if(startingColumn < 0 || startingRow < 0 ||endingColumn < 0 || endingRow < 0 ||startingColumn > 8 || startingRow > 8 ||endingColumn > 8 || endingRow > 8 ) {
 				System.out.println("One of those positions doesn't exist");
-				System.out.println(startingColumn);
-				System.out.println(startingRow);
-				System.out.println(endingColumn);
-				System.out.println(endingRow);
-				System.out.println(startingPosition);
-			}else {
-				System.out.println(startingColumn);
-				System.out.println(startingRow);
-				System.out.println(endingColumn);
-				System.out.println(endingRow);
-				System.out.println(startingPosition);
-		
-				
+			}else {	
 		//		while (!board.checkmate) {
 		//			System.out.println("playing game");
 		//		}
@@ -74,12 +63,10 @@ public class Game {
 							}
 							
 						}else if(board.chessBoard[endingRow][endingColumn] != null) {
-							System.out.println("hits");
 							if(ending.color == 'w' && board.whitesTurn == false ) {
 								if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
 									
 								}else {
-									System.out.println("0");
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
 									board.whitesTurn = !board.whitesTurn;
@@ -88,7 +75,6 @@ public class Game {
 								if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
 									
 								}else {
-									System.out.println("1");
 									board.chessBoard[endingRow][endingColumn]= board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
 									board.whitesTurn = !board.whitesTurn;

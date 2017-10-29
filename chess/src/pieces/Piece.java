@@ -23,7 +23,6 @@ public abstract class Piece {
 
 			if(singleStep) {
 				int diff = Math.abs(startColumn-endColumn);
-				System.out.println("Diff: "+ diff);
 
 				if(diff == 1) {
 					return true;
@@ -57,11 +56,7 @@ public abstract class Piece {
 		//Will need to check whether there are pieces in the way.
 		int vertDirection = 0;
 		int horDirection = 0;
-		System.out.println("startCol = "+ startColumn);
-		System.out.println("startRow = "+ startRow);
-		System.out.println("endCol = "+ endColumn);
-		System.out.println("endRow = "+ endRow);
-		
+
 		if(startColumn > endColumn) {
 			horDirection = -1;
 		}else if(startColumn < endColumn){
@@ -83,10 +78,7 @@ public abstract class Piece {
 			if(singleStep) {
 				diag = false;
 			}
-			System.out.println("test 0");
-			System.out.println(tempx);
-			System.out.println(tempy);
-			
+
 			tempx++;
 			tempy--;
 			if(!(tempx < 0 || tempy < 0 || tempx > 7 || tempy > 7)) {
@@ -106,10 +98,6 @@ public abstract class Piece {
 			if(singleStep) {
 				diag = false;
 			}
-			System.out.println("test 1");
-			System.out.println(tempx);
-			System.out.println(tempy);
-			
 
 			tempx++;
 			tempy++;
@@ -129,11 +117,6 @@ public abstract class Piece {
 			if(singleStep) {
 				diag = false;
 			}
-			System.out.println("test 2");
-
-			System.out.println(tempx);
-			System.out.println(tempy);
-			
 
 			tempx--;
 			tempy--;
@@ -154,11 +137,6 @@ public abstract class Piece {
 			if(singleStep) {
 				diag = false;
 			}
-			System.out.println("test 3");
-
-			System.out.println(tempx);
-			System.out.println(tempy);
-			
 
 			tempx--;
 			tempy++;
