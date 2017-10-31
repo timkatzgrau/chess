@@ -165,5 +165,24 @@ public class ChessBoard {
 		}
 		System.out.println("a  b  c  d  e  f  g  h");
 	}
+	
+	public void promote(int rowIndex, int columnIndex, char newPiece) {
+		char color = 'w';
+		
+		if (!whitesTurn) {
+			color = 'b';
+		}
+		
+		if (newPiece == 'q') {
+			chessBoard[rowIndex][columnIndex] = new Queen('Q', color);
+		} else if (newPiece == 'b') {
+			chessBoard[rowIndex][columnIndex] = new Bishop('B', color);
+		} else if (newPiece == 'n') {
+			chessBoard[rowIndex][columnIndex] = new Knight('N', color);
+		} else if (newPiece == 'r') {
+			chessBoard[rowIndex][columnIndex] = new Rook('R', color);
+		}
+		
+	}
 
 }

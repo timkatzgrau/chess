@@ -2,9 +2,9 @@ package pieces;
 
 import game.ChessBoard;
 
-public class Rook extends Piece {
+public class Bishop extends Piece {
 	
-	public Rook (char type, char color) {
+	public Bishop (char type, char color) {
 		
 		this.type = type;
 		this.color = color;
@@ -13,7 +13,7 @@ public class Rook extends Piece {
 
 	@Override
 	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
-		if(isHorizontal(board,startRow,startColumn,endRow,endColumn, false) || isVertical(board,startRow,startColumn,endRow,endColumn, false)) {
+		if(isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
 			return true;
 		}else {
 			System.out.println("Invalid Move");

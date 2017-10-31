@@ -5,6 +5,10 @@ import pieces.Piece;
 public class Game {
 	
 	private static Scanner scanner;
+	
+	private static boolean promotionSet = false;
+	
+	private static boolean drawSet = false;
 
 	
 	public static boolean attemptMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow){		
@@ -28,6 +32,16 @@ public class Game {
 		ChessBoard board = new ChessBoard();
 
 		while(true) {
+			
+			//lets not depend on some other part to set this back to false
+			//might skip it if something has gone wrong and will be stuck at true
+			//set back to false on next move
+			if (promotionSet) {
+				promotionSet = false;
+			}
+			
+			System.out.println("heres the bool" + promotionSet);
+			
 			System.out.println("-------------------------");
 			Scanner scanner = new Scanner(System.in).useDelimiter(" ");
 			board.showChessBoard();
@@ -40,6 +54,27 @@ public class Game {
 			
 			System.out.print("Enter your move: ");
 			String startingPosition = scanner.nextLine();
+			
+			if (startingPosition.contains("resign")) {
+				if (board.whitesTurn) {
+					System.out.println("Black wins");
+				} else {
+					System.out.println("White wins");
+				}
+				break;
+			} else if (startingPosition.contains("draw")) {
+				if (!drawSet) {
+					drawSet = true;
+				} else {
+					if (startingPosition.equals("draw")) {
+						break;
+					}
+				}
+			} else if (!startingPosition.contains("draw") && drawSet) {
+				drawSet = false;
+			}
+			
+			
 			int startingColumn = board.convertFile(startingPosition.charAt(0));
 			int startingRow = board.convertRank(startingPosition.charAt(1));	
 			int endingColumn = board.convertFile(startingPosition.charAt(3));
@@ -50,6 +85,29 @@ public class Game {
 		//		while (!board.checkmate) {
 		//			System.out.println("playing game");
 		//		}
+				
+				if (startingPosition.length() == 7) {
+					char newPiece = Character.toLowerCase(startingPosition.charAt(6));
+					
+					if (newPiece == 'p' || newPiece == 'k') {
+						System.out.println("Invalid Move. Can not promote pawn to king or pawn");
+						continue;
+					}
+					
+					if (board.chessBoard[startingRow][startingColumn].type != 'p') {
+						System.out.println("Invalid Move. Can not promote piece that is not a pawn");
+						continue;
+					}
+					
+					if ((board.chessBoard[startingRow][startingColumn].color == 'w' && endingRow == 0) || (board.chessBoard[startingRow][startingColumn].color == 'b' && endingRow == 7)) {
+						promotionSet = true;
+					} else{
+						System.out.print("Invalid attempt at promotion");
+						continue;
+					}
+				}
+				
+				
 				if(attemptMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
 					Piece current = board.chessBoard[startingRow][startingColumn];
 					Piece ending = board.chessBoard[endingRow][endingColumn];
@@ -69,7 +127,14 @@ public class Game {
 								}else {
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
+									
+									if (promotionSet) {
+										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+									}
+									
 									board.whitesTurn = !board.whitesTurn;
+									
+									
 								}
 							}else if(ending.color == 'b' && board.whitesTurn == true) {
 								if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
@@ -77,7 +142,14 @@ public class Game {
 								}else {
 									board.chessBoard[endingRow][endingColumn]= board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
+									
+									if (promotionSet) {
+										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+									}
+									
 									board.whitesTurn = !board.whitesTurn;
+									
+									
 								}
 							}else {
 								System.out.println("You cannot take your own piece");
@@ -88,7 +160,14 @@ public class Game {
 							}else {
 								board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 								board.chessBoard[startingRow][startingColumn] = null;
+								
+								if (promotionSet) {
+									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+								}
+								
 								board.whitesTurn = !board.whitesTurn;
+								
+								
 							}
 						
 					}
