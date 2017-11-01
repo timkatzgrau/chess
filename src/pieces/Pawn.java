@@ -33,7 +33,7 @@ public class Pawn extends Piece {
 				}
 			}
 		}else {
-			System.out.println("Invalid Move for Pawn");
+			System.out.println("Invalid Move for Pawn "+ color);
 			return false;
 		}
 	}

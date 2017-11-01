@@ -16,7 +16,7 @@ public class Queen extends Piece {
 		if(isHorizontal(board,startRow,startColumn,endRow,endColumn, false) || isVertical(board,startRow,startColumn,endRow,endColumn, false) || isDiagnal(board,startRow,startColumn,endRow,endColumn, false)) {
 			return true;
 		}else {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move for Queen "+ color);
 			return false;
 		}
 	}

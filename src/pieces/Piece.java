@@ -20,6 +20,14 @@ public abstract class Piece {
 	public static boolean isVertical(ChessBoard board, int startColumn,int startRow, int endColumn, int endRow,  boolean singleStep  ) {
 		//Will need to check whether there are pieces in the way.
 		
+		boolean isPawn = false;
+		
+		if (board.chessBoard[startColumn][startRow] != null) {
+			if (board.chessBoard[startColumn][startRow].type == 'p') {
+				isPawn = true;
+			}
+		}
+		
 		if(startRow == endRow) {
 			
 			//SHOULD IT BE <= or just <? How do different pieces capture pieces, probably < since a piece other than pawns can capture this way
@@ -28,17 +36,37 @@ public abstract class Piece {
 			//since it wouldnt be null
 			if (startColumn < endColumn) {
 				System.out.println("here");
-				for (int i = startColumn+1; i < endColumn; i++) {
-					if (board.chessBoard[i][startRow] != null) {
-						return false;
+				
+				if (isPawn) {
+					for (int i = startColumn+1; i <= endColumn; i++) {
+						if (board.chessBoard[i][startRow] != null) {
+							return false;
+						}
+					}
+					
+				} else {
+					for (int i = startColumn+1; i < endColumn; i++) {
+						if (board.chessBoard[i][startRow] != null) {
+							return false;
+						}
 					}
 				}
 			} else if (startColumn > endColumn) {
 				System.out.println("else");
-				for (int i = startColumn-1; i >= endColumn; i--) {
-					System.out.println(board.chessBoard[i][startRow]);
-					if (board.chessBoard[i][startRow] != null) {
-						return false;
+				
+				if (isPawn) {
+					for (int i = startColumn-1; i >= endColumn; i--) {
+						System.out.println(board.chessBoard[i][startRow]);
+						if (board.chessBoard[i][startRow] != null) {
+							return false;
+						}
+					}
+				} else {
+					for (int i = startColumn-1; i > endColumn; i--) {
+						System.out.println(board.chessBoard[i][startRow]);
+						if (board.chessBoard[i][startRow] != null) {
+							return false;
+						}
 					}
 				}
 			}
@@ -71,13 +99,13 @@ public abstract class Piece {
 			//SHOULD IT BE <= or just <? How do different pieces capture pieces, probably < since a piece other than pawns can capture this way
 			//I think pawns may change whether it is < or <=
 			if (startRow < endRow) {
-				for (int i = startRow+1; i <= endRow; i++) {
+				for (int i = startRow+1; i < endRow; i++) {
 					if (board.chessBoard[startColumn][i] != null) {
 						return false;
 					}
 				}
 			} else if (startRow > endRow) {
-				for (int i = startRow-1; i >= endRow; i--) {
+				for (int i = startRow-1; i > endRow; i--) {
 					if (board.chessBoard[startColumn][i] != null) {
 						return false;
 					}
@@ -194,6 +222,7 @@ public abstract class Piece {
 				diag = false;
 			}
 		}
+		System.out.print("Gets here");;
 		return false;
 	}
 	

@@ -19,6 +19,12 @@ public class Knight extends Piece {
 		if(startColumn+1 == endColumn && startRow+2 == endRow || startColumn-1 == endColumn && startRow+2 == endRow || startColumn+1 == endColumn && startRow-2 == endRow || startColumn-1 == endColumn && startRow-2 == endRow) {
 			return true;
 		}
+		System.out.println("Invalid Move for Knight "+ color);
+		System.out.println(startColumn);
+		System.out.println(startRow);
+		System.out.println(endColumn);
+		System.out.println(endRow);
+		
 		return false;
 	}
 

@@ -4,7 +4,7 @@ import java.util.Scanner;
 import pieces.Piece;
 public class Game {
 	
-	static boolean testing = true;
+	static boolean testing = false;
 	
 	private static Scanner scanner;
 	
@@ -118,73 +118,169 @@ public class Game {
 				if(attemptMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
 					Piece current = board.chessBoard[startingRow][startingColumn];
 					Piece ending = board.chessBoard[endingRow][endingColumn];
+					
 						if(board.chessBoard[startingRow][startingColumn] == null) {
-							if(board.chessBoard[startingRow][startingColumn].color == 'w' && (board.chessBoard[endingRow][endingColumn].color == 'w')){
-								System.out.println("Invalid Move. You cannot take your own piece.");
-							}else if(board.chessBoard[startingRow][startingColumn].color == 'b' && (board.chessBoard[endingRow][endingColumn].color == 'b')){
-								System.out.println("Invalid Move. You cannot take your own piece.");
-							}else {
-								System.out.println("Invalid Piece Selection");
-							}
-							
+							System.out.println("Invalid Piece Selection");
+						}else if(startingColumn == endingColumn && startingRow == endingRow) {
+							System.out.println("Cannot move to same spot.");
 						}else if(board.chessBoard[endingRow][endingColumn] != null) {
-							if(ending.color == 'w' && board.whitesTurn == false ) {
-								if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
+							if(board.chessBoard[startingRow][startingColumn].color == board.chessBoard[endingRow][endingColumn].color) {
+								System.out.println("You cannot take your own piece!");
+							}else if(current.color == 'w' && board.whitesTurn != true) {
+								System.out.print("It's not your turn");
+							}else if(current.color == 'b' && board.whitesTurn == true) {
+								System.out.print("It's not your turn");
+							}else {
+								if(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
+									System.out.print("Hits");
+								
+								
+								if(board.isInCheck() == 0) {
+									if (promotionSet) {
+										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+									}
+										board.whitesTurn = !board.whitesTurn;
+										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+										board.chessBoard[startingRow][startingColumn] = null;
+										board.isInCheck();
+										
+										
+								}else if(board.isInCheck() == 1) {
+									System.out.print("wooo");
+
+									if (promotionSet) {
+										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+									}
 									
-								}else {
+									if(board.whitesTurn == false) {
+										board.whitesTurn = !board.whitesTurn;
+										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+										board.chessBoard[startingRow][startingColumn] = null;
+										System.out.print("White is in Check!");
+									}else {
+										Piece temp = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+										board.chessBoard[startingRow][startingColumn] = null;
+										
+										if(board.isInCheck() == 1) {
+											board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+											board.chessBoard[endingRow][endingColumn] = temp;
+										}else {
+											board.whitesTurn = !board.whitesTurn;
+
+										}
+										System.out.print("White is in Check!");
+									}
+												
+								}else if(board.isInCheck() == 2) {
+									
+									if (promotionSet) {
+										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+									}
+									
+									if(board.whitesTurn == true) {
+										board.whitesTurn = !board.whitesTurn;
+										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+										board.chessBoard[startingRow][startingColumn] = null;
+										System.out.print("Black is in Check!");
+										board.isInCheck();
+									}else {
+										Piece temp = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+										board.chessBoard[startingRow][startingColumn] = null;
+										
+										if(board.isInCheck() == 2) {
+											board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+											board.chessBoard[endingRow][endingColumn] = temp;
+										}else {
+											board.whitesTurn = !board.whitesTurn;
+
+										}
+										System.out.print("Black is in Check!");
+									}
+												
+								}
+							
+								}}
+							
+						}else {
+							if(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow)) {
+								System.out.print("Hits");
+							
+							
+							if(board.isInCheck() == 0) {
+								if (promotionSet) {
+									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
+								}
+									board.whitesTurn = !board.whitesTurn;
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
-									
-									if (promotionSet) {
-										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
-									}
-									if(board.check()) {		
-										board.whitesTurn = !board.whitesTurn;
-									}
-									
-								}
-							}else if(ending.color == 'b' && board.whitesTurn == true) {
-								if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
-									
-								}else {
-									board.chessBoard[endingRow][endingColumn]= board.chessBoard[startingRow][startingColumn];	
-									board.chessBoard[startingRow][startingColumn] = null;
-									
-									if (promotionSet) {
-										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
-									}
-									
-									if(board.check()) {		
-										board.whitesTurn = !board.whitesTurn;
-									}
+									board.isInCheck();
 									
 									
-								}
-							}else {
-								System.out.println("You cannot take your own piece");
-							}
-						}else {
-							if(!(current.canDoMove(board,startingColumn,startingRow, endingColumn, endingRow))) {
-								
-							}else {
-								board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
-								board.chessBoard[startingRow][startingColumn] = null;
-								
+							}else if(board.isInCheck() == 1) {
+								System.out.print("wooo");
+
 								if (promotionSet) {
 									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 								}
 								
-								if(board.check()) {		
+								if(board.whitesTurn == false) {
 									board.whitesTurn = !board.whitesTurn;
+									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+									board.chessBoard[startingRow][startingColumn] = null;
+									System.out.print("White is in Check!");
+								}else {
+									Piece temp = board.chessBoard[endingRow][endingColumn];
+									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+									board.chessBoard[startingRow][startingColumn] = null;
+									
+									if(board.isInCheck() == 1) {
+										board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = temp;
+									}else {
+										board.whitesTurn = !board.whitesTurn;
+
+									}
+									System.out.print("White is in Check!");
+								}
+											
+							}else if(board.isInCheck() == 2) {
+								System.out.print("yesy");
+								if (promotionSet) {
+									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 								}
 								
-								
+								if(board.whitesTurn == true) {
+									board.whitesTurn = !board.whitesTurn;
+									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+									board.chessBoard[startingRow][startingColumn] = null;
+									System.out.print("Black is in Check!");
+									board.isInCheck();
+								}else {
+									Piece temp = board.chessBoard[endingRow][endingColumn];
+									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+									board.chessBoard[startingRow][startingColumn] = null;
+									
+									if(board.isInCheck() == 2) {
+										board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = temp;
+									}else {
+										board.whitesTurn = !board.whitesTurn;
+
+									}
+									System.out.print("Black is in Check!");
+								}
+											
 							}
+						}
+						
+
 						
 					}
+						
 				}
-			}
-			
+	
 		}
-	}
-}
+	
+}}}

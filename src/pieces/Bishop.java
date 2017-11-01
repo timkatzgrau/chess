@@ -16,7 +16,7 @@ public class Bishop extends Piece {
 		if(isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
 			return true;
 		}else {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move for Bishop "+ color);
 			return false;
 		}
 	}
