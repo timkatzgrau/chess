@@ -8,15 +8,14 @@ public class Bishop extends Piece {
 		
 		this.type = type;
 		this.color = color;
-		numberOfMoves = 0;
 	}
 
 	@Override
 	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
-		if(isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
+		if(isDiagnal(board,startRow,startColumn,endRow,endColumn, false)) {
 			return true;
 		}else {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move for Bishop "+ color);
 			return false;
 		}
 	}

@@ -145,6 +145,37 @@ public class ChessBoard {
 		chessBoard[6][6] = new Pawn('p', 'w');
 		chessBoard[6][7] = new Pawn('p', 'w');
 	}
+	public ChessBoard (int test) {
+		chessBoard[0][0] = new Rook('R', 'b');
+		chessBoard[0][1] = new Knight('N', 'b');
+		chessBoard[0][2] = new Bishop('B', 'b');
+		chessBoard[0][3] = new Queen('Q', 'b');
+		chessBoard[0][4] = new King('K', 'b');
+		chessBoard[0][5] = new Bishop('B', 'b');
+		chessBoard[0][6] = new Knight('N', 'b');
+		chessBoard[0][7] = new Rook('R', 'b');
+		
+		chessBoard[1][0] = new Pawn('p', 'b');
+		chessBoard[1][1] = new Pawn('p', 'b');
+		chessBoard[1][2] = new Pawn('p', 'b');
+		chessBoard[1][6] = new Pawn('p', 'b');
+		chessBoard[1][7] = new Pawn('p', 'b');
+		chessBoard[5][1] = new Bishop('B', 'w');
+		
+		chessBoard[7][0] = new Rook('R', 'w');
+		chessBoard[7][1] = new Knight('N', 'w');
+		chessBoard[7][2] = new Bishop('B', 'w');
+		chessBoard[7][3] = new Queen('Q', 'w');
+		chessBoard[7][4] = new King('K', 'w');
+		chessBoard[7][6] = new Knight('N', 'w');
+		chessBoard[7][7] = new Rook('R', 'w');
+		
+		chessBoard[6][0] = new Pawn('p', 'w');
+		chessBoard[6][1] = new Pawn('p', 'w');
+		chessBoard[6][2] = new Pawn('p', 'w');
+		chessBoard[6][6] = new Pawn('p', 'w');
+		chessBoard[6][7] = new Pawn('p', 'w');
+	}
 	
 	public void showChessBoard () {
 		for (int row = 0; row < chessBoard.length; row++) {
@@ -166,6 +197,14 @@ public class ChessBoard {
 		System.out.println("a  b  c  d  e  f  g  h");
 	}
 	
+	public boolean check() {
+		for(int i = 0; i < 7; i++) {
+			for(int j = 0; j < 7; j++) {
+			}
+		}
+		return true;
+	}
+	
 	public void promote(int rowIndex, int columnIndex, char newPiece) {
 		char color = 'w';
 		
@@ -183,6 +222,53 @@ public class ChessBoard {
 			chessBoard[rowIndex][columnIndex] = new Rook('R', color);
 		}
 		
-	}
+}
 
+
+
+	public int isInCheck(){
+		
+		int blackRow = 0;
+		int blackCol = 0;
+		int whiteRow = 0;
+		int whiteCol = 0;
+
+		 for(int x = 0; x <= 7; x++){
+		        for(int y = 0; y <= 7; y++){
+		            if(chessBoard[x][y] != null){
+		                if(chessBoard[x][y].type == 'K'){
+		                		if(chessBoard[x][y].color == 'b') {
+		                			blackRow = x;
+		                			blackCol = y;
+		                		}else {
+		                			whiteRow = x;
+		                			whiteCol = y;
+			                }
+		                }
+		            }
+		        }
+		    }
+		 System.out.print("HEYYYYY: "+chessBoard[whiteRow][whiteCol].type );
+	    for(int x = 0; x <= 7; x++){
+	        for(int y = 0; y <= 7; y++){
+	            if(chessBoard[x][y] != null){
+
+	            		if(chessBoard[x][y].color == 'b') {
+	            			if(chessBoard[x][y].canDoMove(this, y,x, whiteCol, whiteRow) ){
+	            				System.out.print("White is in Check");
+	            				return 1;
+	    	                }	
+	            		}else {
+	            			if(chessBoard[x][y].canDoMove(this, y,x, blackCol, blackRow)){
+	            				 System.out.print("Black is in Check");
+	            				return 2;
+	    	                }	
+	            		}
+	                
+	            }
+	        }
+	    }
+	
+	    return 0;
+	}
 }

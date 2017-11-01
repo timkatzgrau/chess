@@ -8,7 +8,6 @@ public class Rook extends Piece {
 		
 		this.type = type;
 		this.color = color;
-		numberOfMoves = 0;
 	}
 
 	@Override
@@ -16,7 +15,7 @@ public class Rook extends Piece {
 		if(isHorizontal(board,startRow,startColumn,endRow,endColumn, false) || isVertical(board,startRow,startColumn,endRow,endColumn, false)) {
 			return true;
 		}else {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move for Rook " + color);
 			return false;
 		}
 	}

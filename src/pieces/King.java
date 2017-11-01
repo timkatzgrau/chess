@@ -8,15 +8,34 @@ public class King extends Piece {
 		
 		this.type = type;
 		this.color = color;
-		numberOfMoves = 0;
 	}
 
 	@Override
 	public boolean canDoMove(ChessBoard board, int startColumn, int startRow, int endColumn, int endRow) {
-		if(isHorizontal(board,startColumn,startRow,endColumn,endRow, false) || isVertical(board,startColumn,startRow,endColumn,endRow, false) || isDiagnal(board,startColumn,startRow,endColumn,endRow, false)) {
+		
+		//change rows and columns to match others
+		
+		//attempting castle move
+		//being blocked in game as attempting to take own piece
+		//this is not fully implemented and working, pieces swapping is not there
+		if (board.chessBoard[endRow][endColumn] != null && board.chessBoard[endRow][endColumn].type == 'N' && board.chessBoard[endRow][endColumn].color == color) {
+			if (hasMoved == false && board.chessBoard[endRow][endColumn].hasMoved == false) {
+				if (isHorizontal(board,startRow,startColumn,endRow,endColumn, false)) {
+					return true;
+				} else {
+					System.out.println("Invalid castle first check");
+					return false;
+				}
+			} else {
+				System.out.println("Invalid castle second check");
+				return false;
+			}
+		}
+				
+		if(isHorizontal(board,startRow,startColumn,endRow,endColumn, true) || isVertical(board,startRow,startColumn,endRow,endColumn, true) || isDiagnal(board,startRow,startColumn,endRow,endColumn, true)) {
 			return true;
 		}else {
-			System.out.println("Invalid Move");
+			System.out.println("Invalid Move for king "+ color);
 			return false;
 		}
 	}
