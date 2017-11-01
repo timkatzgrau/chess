@@ -4,6 +4,8 @@ import java.util.Scanner;
 import pieces.Piece;
 public class Game {
 	
+	static boolean testing = true;
+	
 	private static Scanner scanner;
 	
 	private static boolean promotionSet = false;
@@ -29,7 +31,12 @@ public class Game {
 		return true;
 	}
 	public static void main(String[] args) {
-		ChessBoard board = new ChessBoard();
+		ChessBoard board;
+		if(testing) {
+			 board = new ChessBoard(1);
+		}else {
+			 board = new ChessBoard();
+		}
 
 		while(true) {
 			
@@ -131,9 +138,9 @@ public class Game {
 									if (promotionSet) {
 										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 									}
-									
-									board.whitesTurn = !board.whitesTurn;
-									
+									if(board.check()) {		
+										board.whitesTurn = !board.whitesTurn;
+									}
 									
 								}
 							}else if(ending.color == 'b' && board.whitesTurn == true) {
@@ -147,7 +154,9 @@ public class Game {
 										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 									}
 									
-									board.whitesTurn = !board.whitesTurn;
+									if(board.check()) {		
+										board.whitesTurn = !board.whitesTurn;
+									}
 									
 									
 								}
@@ -165,7 +174,9 @@ public class Game {
 									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 								}
 								
-								board.whitesTurn = !board.whitesTurn;
+								if(board.check()) {		
+									board.whitesTurn = !board.whitesTurn;
+								}
 								
 								
 							}

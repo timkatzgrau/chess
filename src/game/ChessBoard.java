@@ -145,6 +145,42 @@ public class ChessBoard {
 		chessBoard[6][6] = new Pawn('p', 'w');
 		chessBoard[6][7] = new Pawn('p', 'w');
 	}
+	public ChessBoard (int test) {
+		chessBoard[0][0] = new Rook('R', 'b');
+		chessBoard[0][1] = new Knight('N', 'b');
+		chessBoard[0][2] = new Bishop('B', 'b');
+		chessBoard[0][3] = new Queen('Q', 'b');
+		chessBoard[0][4] = new King('K', 'b');
+		chessBoard[0][5] = new Bishop('B', 'b');
+		chessBoard[0][6] = new Knight('N', 'b');
+		chessBoard[0][7] = new Rook('R', 'b');
+		
+		chessBoard[1][0] = new Pawn('p', 'b');
+		chessBoard[1][1] = new Pawn('p', 'b');
+		chessBoard[1][2] = new Pawn('p', 'b');
+		chessBoard[1][4] = new Pawn('p', 'b');
+		chessBoard[1][5] = new Pawn('p', 'b');
+		chessBoard[1][6] = new Pawn('p', 'b');
+		chessBoard[1][7] = new Pawn('p', 'b');
+		chessBoard[5][1] = new Pawn('B', 'w');
+		
+		chessBoard[7][0] = new Rook('R', 'w');
+		chessBoard[7][1] = new Knight('N', 'w');
+		chessBoard[7][2] = new Bishop('B', 'w');
+		chessBoard[7][3] = new Queen('Q', 'w');
+		chessBoard[7][4] = new King('K', 'w');
+		chessBoard[7][6] = new Knight('N', 'w');
+		chessBoard[7][7] = new Rook('R', 'w');
+		
+		chessBoard[6][0] = new Pawn('p', 'w');
+		chessBoard[6][1] = new Pawn('p', 'w');
+		chessBoard[6][2] = new Pawn('p', 'w');
+		chessBoard[6][3] = new Pawn('p', 'w');
+		chessBoard[6][4] = new Pawn('p', 'w');
+		chessBoard[6][5] = new Pawn('p', 'w');
+		chessBoard[6][6] = new Pawn('p', 'w');
+		chessBoard[6][7] = new Pawn('p', 'w');
+	}
 	
 	public void showChessBoard () {
 		for (int row = 0; row < chessBoard.length; row++) {
@@ -164,6 +200,15 @@ public class ChessBoard {
 			System.out.println(8-row + "");
 		}
 		System.out.println("a  b  c  d  e  f  g  h");
+	}
+	
+	public boolean check() {
+		for(int i = 0; i < 7; i++) {
+			for(int j = 0; j < 7; j++) {
+				chessBoard[i][j] = new Pawn('p', 'w');
+			}
+		}
+		return true;
 	}
 	
 	public void promote(int rowIndex, int columnIndex, char newPiece) {

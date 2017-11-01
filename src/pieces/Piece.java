@@ -28,7 +28,7 @@ public abstract class Piece {
 			//since it wouldnt be null
 			if (startColumn < endColumn) {
 				System.out.println("here");
-				for (int i = startColumn+1; i <= endColumn; i++) {
+				for (int i = startColumn+1; i < endColumn; i++) {
 					if (board.chessBoard[i][startRow] != null) {
 						return false;
 					}
