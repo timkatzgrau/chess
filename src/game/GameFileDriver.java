@@ -145,16 +145,30 @@ public class GameFileDriver {
 								
 								
 								if(board.isInCheck() == 0) {
+									board.isCheckMate();
 									if (promotionSet) {
 										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 									}
-										board.whitesTurn = !board.whitesTurn;
-										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
-										board.chessBoard[startingRow][startingColumn] = null;
+									
+									Piece temp = board.chessBoard[endingRow][endingColumn];
+									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+									board.chessBoard[startingRow][startingColumn] = null;
+									
+									if(board.isInCheck() == 1 && board.whitesTurn) {
+										board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = temp;
+										System.out.println("You cannot put yourself in check!");
+									}else if(board.isInCheck() == 2 && !board.whitesTurn) {
+										board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+										board.chessBoard[endingRow][endingColumn] = temp;
+										System.out.println("You cannot put yourself in check!");
+									}else {
+										board.whitesTurn = ! board.whitesTurn;
 										board.isInCheck();
-										
-										
+									}	
+									board.isCheckMate();
 								}else if(board.isInCheck() == 1) {
+									board.isCheckMate();
 									System.out.print("wooo");
 
 									if (promotionSet) {
@@ -165,7 +179,7 @@ public class GameFileDriver {
 										board.whitesTurn = !board.whitesTurn;
 										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 										board.chessBoard[startingRow][startingColumn] = null;
-										System.out.print("White is in Check!");
+										System.out.println("White is in Check!-----");
 									}else {
 										Piece temp = board.chessBoard[endingRow][endingColumn];
 										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
@@ -176,13 +190,12 @@ public class GameFileDriver {
 											board.chessBoard[endingRow][endingColumn] = temp;
 										}else {
 											board.whitesTurn = !board.whitesTurn;
-
+											board.isInCheck();
 										}
-										System.out.print("White is in Check!");
 									}
-												
+									board.isCheckMate();			
 								}else if(board.isInCheck() == 2) {
-									
+									board.isCheckMate();
 									if (promotionSet) {
 										board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 									}
@@ -192,7 +205,6 @@ public class GameFileDriver {
 										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 										board.chessBoard[startingRow][startingColumn] = null;
 										System.out.print("Black is in Check!");
-										board.isInCheck();
 									}else {
 										Piece temp = board.chessBoard[endingRow][endingColumn];
 										board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
@@ -203,10 +215,10 @@ public class GameFileDriver {
 											board.chessBoard[endingRow][endingColumn] = temp;
 										}else {
 											board.whitesTurn = !board.whitesTurn;
-
+											board.isInCheck();
 										}
-										System.out.print("Black is in Check!");
 									}
+									board.isCheckMate();
 												
 								}
 							
@@ -218,16 +230,30 @@ public class GameFileDriver {
 							
 							
 							if(board.isInCheck() == 0) {
+								board.isCheckMate();
 								if (promotionSet) {
 									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
 								}
-									board.whitesTurn = !board.whitesTurn;
-									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
-									board.chessBoard[startingRow][startingColumn] = null;
+								
+								Piece temp = board.chessBoard[endingRow][endingColumn];
+								board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
+								board.chessBoard[startingRow][startingColumn] = null;
+								
+								if(board.isInCheck() == 1 && board.whitesTurn) {
+									board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+									board.chessBoard[endingRow][endingColumn] = temp;
+									System.out.println("You cannot put yourself in check!");
+								}else if(board.isInCheck() == 2 && !board.whitesTurn) {
+									board.chessBoard[startingRow][startingColumn] = board.chessBoard[endingRow][endingColumn];
+									board.chessBoard[endingRow][endingColumn] = temp;
+									System.out.println("You cannot put yourself in check!");
+								}else {
+									board.whitesTurn = ! board.whitesTurn;
 									board.isInCheck();
-									
-									
+								}
+								board.isCheckMate();
 							}else if(board.isInCheck() == 1) {
+								board.isCheckMate();
 								System.out.print("wooo");
 
 								if (promotionSet) {
@@ -238,7 +264,7 @@ public class GameFileDriver {
 									board.whitesTurn = !board.whitesTurn;
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
-									System.out.print("White is in Check!");
+									System.out.println("White is in Check!---");
 								}else {
 									Piece temp = board.chessBoard[endingRow][endingColumn];
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
@@ -249,12 +275,13 @@ public class GameFileDriver {
 										board.chessBoard[endingRow][endingColumn] = temp;
 									}else {
 										board.whitesTurn = !board.whitesTurn;
-
+										board.isInCheck();
 									}
-									System.out.print("White is in Check!");
 								}
+								board.isCheckMate();
 											
 							}else if(board.isInCheck() == 2) {
+								board.isCheckMate();
 								System.out.print("yesy");
 								if (promotionSet) {
 									board.promote(endingRow, endingColumn, Character.toLowerCase(startingPosition.charAt(6)));
@@ -265,7 +292,7 @@ public class GameFileDriver {
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
 									board.chessBoard[startingRow][startingColumn] = null;
 									System.out.print("Black is in Check!");
-									board.isInCheck();
+									System.out.print(board.isInCheck());
 								}else {
 									Piece temp = board.chessBoard[endingRow][endingColumn];
 									board.chessBoard[endingRow][endingColumn] = board.chessBoard[startingRow][startingColumn];	
@@ -276,11 +303,10 @@ public class GameFileDriver {
 										board.chessBoard[endingRow][endingColumn] = temp;
 									}else {
 										board.whitesTurn = !board.whitesTurn;
-
+										board.isInCheck();
 									}
-									System.out.print("Black is in Check!");
 								}
-											
+								board.isCheckMate();			
 							}
 						}
 						
