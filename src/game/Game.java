@@ -156,7 +156,7 @@ public class Game {
 							System.out.println("Invalid Piece Selection");
 						}else if(startingColumn == endingColumn && startingRow == endingRow) {
 							System.out.println("Cannot move to same spot.");
-						}else if((board.chessBoard[startingRow][startingColumn].type == 'K' && board.chessBoard[endingRow][endingColumn].type == 'R') && (board.chessBoard[startingRow][startingColumn].color == board.chessBoard[endingRow][endingColumn].color)){
+						}else if((board.chessBoard[startingRow][startingColumn] != null && board.chessBoard[endingRow][endingColumn] != null && board.chessBoard[startingRow][startingColumn].type == 'K' && board.chessBoard[endingRow][endingColumn].type == 'R') && (board.chessBoard[startingRow][startingColumn].color == board.chessBoard[endingRow][endingColumn].color)){
 							if(!(board.chessBoard[startingRow][startingColumn].canDoMove(board, startingColumn, startingRow, endingColumn, endingRow))) {
 								System.out.println("Invalid Castle");
 							}else {
